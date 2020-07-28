@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9202023740708022334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9202023740708022333}
+  - component: {fileID: 9202023740708022332}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9202023740708022333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9202023740708022334}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9202023740708022332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9202023740708022334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da46cd4c046ba66cf81279e9976a59d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sounds:
+  - Name: Background Audio
+    clip: {fileID: 8300000, guid: 2ec6b4b17de0d0ad6a99c7fb7f4738d9, type: 3}
+    Source: {fileID: 0}
+    Volume: 1
+    Pitch: 1
+    Loop: 1
+  - Name: Player Jump
+    clip: {fileID: 8300000, guid: 10445d8496cdded3ea5334aec2dc31c7, type: 3}
+    Source: {fileID: 0}
+    Volume: 0.9
+    Pitch: 1
+    Loop: 0
+  - Name: Player Damage
+    clip: {fileID: 8300000, guid: 5c3f94938e7edc460a24ab7368fd6ba2, type: 3}
+    Source: {fileID: 0}
+    Volume: 0.72
+    Pitch: 1
+    Loop: 0
+  - Name: Player Heal
+    clip: {fileID: 8300000, guid: 2e75105d0aed50437b2533bbbcf2d039, type: 3}
+    Source: {fileID: 0}
+    Volume: 0.9
+    Pitch: 1
+    Loop: 0
+  - Name: Player Land
+    clip: {fileID: 8300000, guid: 51ea550d68035daab8511ce42979aa21, type: 3}
+    Source: {fileID: 0}
+    Volume: 0.62
+    Pitch: 1
+    Loop: 0
+  - Name: Player Win
+    clip: {fileID: 8300000, guid: 46020647218dc19169fda6f9c5ab893e, type: 3}
+    Source: {fileID: 0}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  - Name: Inverted to Normal
+    clip: {fileID: 8300000, guid: d975a1f6be2e0eb48813a123bc3cec96, type: 3}
+    Source: {fileID: 0}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  - Name: Normal to Inverted
+    clip: {fileID: 8300000, guid: cbd51a2ba5ccc71d2b4686189f0083ac, type: 3}
+    Source: {fileID: 0}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  Audio_Sources: {fileID: 9202023740708022334}
