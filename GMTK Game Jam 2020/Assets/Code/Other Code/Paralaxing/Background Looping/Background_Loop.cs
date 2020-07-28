@@ -60,7 +60,7 @@ public class Background_Loop : MonoBehaviour {
 
         float Object_Width = Object.GetComponent <SpriteRenderer> ().bounds.size.x - Choke;
 
-        int Childs_Needed = (int) Mathf.Ceil (Screen_Bounds.x * 2 / Object_Width);
+        int Childs_Needed = (int) Mathf.Ceil (Screen_Bounds.x * 4 / Object_Width);
 
         GameObject Clone = Instantiate (Object) as GameObject;
 
@@ -92,7 +92,7 @@ public class Background_Loop : MonoBehaviour {
 
             float Difference = transform.position.x - Last_Screen_Position.x;
 
-            Object.transform.Translate (Vector3.right * Difference * Parallax_Speed);
+            Object.transform.Translate ((Vector3.right * Difference * Parallax_Speed) * 2);
 
         }
         

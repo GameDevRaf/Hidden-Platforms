@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Player Damage
   m_EditorClassIdentifier: 
   shakeType: 0
-  strength: 0
+  strength: 2
   roughness: 0
-  fadeIn: 0
+  fadeIn: 0.1
   fadeOut: 0
-  positionInfluence: {x: 0, y: 0, z: 0}
+  positionInfluence: {x: 0.4, y: 0.4, z: 0}
   rotationInfluence: {x: 0, y: 0, z: 0}
