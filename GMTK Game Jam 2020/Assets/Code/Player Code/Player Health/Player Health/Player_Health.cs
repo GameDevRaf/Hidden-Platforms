@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine;
+using MilkShake;
 
 public class Player_Health : MonoBehaviour {
 
@@ -12,6 +13,20 @@ public class Player_Health : MonoBehaviour {
             public Health_Bar Health_bar;
 
             public Player_Move Player_move;
+
+        #endregion
+
+        #region Shaker
+
+            [SerializeField]
+            private Shaker My_Shaker;
+
+        #endregion
+
+        #region Shaker_Preset
+
+            [SerializeField]
+            private ShakePreset Shake_Preset;
 
         #endregion
 
@@ -41,25 +56,11 @@ public class Player_Health : MonoBehaviour {
 
     }
 
-    void Update() {
-
-        if (Input.GetKeyDown (KeyCode.Q)) {
-
-            Take_Damage (2);
-            
-        }
-
-        if(Input.GetKeyDown (KeyCode.E)) {
-
-            Gain_Health (2);
-
-        }
-
-    }
-
     public void Take_Damage(int Damage_Amount) {
 
         Current_Health -= Damage_Amount;
+
+        My_Shaker.Shake (Shake_Preset);
 
         if (Current_Health <= 0) {
             
@@ -68,6 +69,8 @@ public class Player_Health : MonoBehaviour {
             SceneManager.LoadScene (SceneManager.GetActiveScene().buildIndex);
 
         }
+
+        FindObjectOfType <Audio_Manager> ().Play (Tags.Player_Damage);
 
         Health_bar.Set_Health (Current_Health);
 

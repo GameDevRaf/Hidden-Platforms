@@ -41,8 +41,6 @@ public class Ground_Check : MonoBehaviour {
 
             Player_jump.Player_is_Grounded = true;
 
-            FindObjectOfType <Audio_Manager> ().Play (Tags.Player_Damage);
-
             Player_Animator.SetBool (Tags.Is_Grounded, true);
 
         }
