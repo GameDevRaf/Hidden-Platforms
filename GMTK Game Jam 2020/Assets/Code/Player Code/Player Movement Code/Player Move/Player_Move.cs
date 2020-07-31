@@ -20,6 +20,13 @@ public class Player_Move : MonoBehaviour {
 
         #endregion
 
+        #region Particle's
+
+            [SerializeField]
+            private ParticleSystem Dust_Cloud;
+
+        #endregion
+
         #region Animators
 
             [SerializeField]
@@ -50,6 +57,12 @@ public class Player_Move : MonoBehaviour {
 
         #endregion
 
+        #region Boolean Variable's
+
+            private bool Player_is_Facing_Right;
+
+        #endregion
+
     #endregion
 
     // Update is called once per frame
@@ -57,15 +70,47 @@ public class Player_Move : MonoBehaviour {
 
         #region Flip Player ( When Moving Left )
 
-            if (Movement.x > 0) {
+            if (Player_is_Facing_Right == true) {
+
+                if (Movement.x > 0) {
             
-                Player_Transform.eulerAngles = new Vector3 (0f, 0f, 0f);
+                    Player_Transform.eulerAngles = new Vector3 (0f, 0f, 0f);
+
+                }
+
+                else if(Movement.x < 0) {
+
+                    if (Player_jump.Player_is_Grounded == true) {
+
+                        Dust_Cloud.Play ();
+
+                    }
+
+                    Player_is_Facing_Right = false;
+
+                }
 
             }
 
-            else if(Movement.x < 0) {
+            else if (Player_is_Facing_Right == false) {
 
-                Player_Transform.eulerAngles = new Vector3 (0f, 180f, 0f);
+                if(Movement.x < 0) {
+
+                    Player_Transform.eulerAngles = new Vector3 (0f, 180f, 0f);
+
+                }
+
+                else if(Movement.x > 0) {
+
+                    if (Player_jump.Player_is_Grounded == true) {
+
+                        Dust_Cloud.Play ();
+
+                    }
+
+                    Player_is_Facing_Right = true;
+
+                }
 
             }
 

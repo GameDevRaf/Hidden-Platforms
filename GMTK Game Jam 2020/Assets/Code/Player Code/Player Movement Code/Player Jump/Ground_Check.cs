@@ -16,6 +16,19 @@ public class Ground_Check : MonoBehaviour {
 
         #endregion
 
+        #region Particle's
+
+            [SerializeField]
+            private ParticleSystem Dust_Cloud;
+
+            [SerializeField]
+            private ParticleSystem Healing_Effect;
+
+            [SerializeField]
+            private ParticleSystem Damage_Effect;
+
+        #endregion
+
         #region Animator's
 
             [SerializeField]
@@ -41,6 +54,8 @@ public class Ground_Check : MonoBehaviour {
 
             Player_jump.Player_is_Grounded = true;
 
+            Damage_Effect.Play ();
+
             Player_Animator.SetBool (Tags.Is_Grounded, true);
 
         }
@@ -48,6 +63,8 @@ public class Ground_Check : MonoBehaviour {
         else if(collider.tag == Tags.Healing_Ground) {
 
             Player_jump.Player_is_Grounded = true;
+
+            Healing_Effect.Play ();
 
             FindObjectOfType <Audio_Manager> ().Play (Tags.Player_Heal);
 
@@ -67,6 +84,12 @@ public class Ground_Check : MonoBehaviour {
             
         }
         
+    }
+
+    void Play_Dust_Particles() {
+
+        Dust_Cloud.Play ();
+
     }
 
 }

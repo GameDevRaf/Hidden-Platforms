@@ -20,6 +20,13 @@ public class Player_Jump : MonoBehaviour {
 
         #endregion
 
+        #region Particle's
+
+            [SerializeField]
+            private ParticleSystem Dust_Cloud;
+
+        #endregion
+
         #region Animator's
 
             [SerializeField]
@@ -64,6 +71,8 @@ public class Player_Jump : MonoBehaviour {
 
             Player_is_Jumping = true;
             Jump_Time_Counter = Jump_Time;
+
+            Dust_Cloud.Play ();
 
             FindObjectOfType <Audio_Manager> ().Play (Tags.Player_Jump);
 
