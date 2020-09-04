@@ -41,6 +41,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2651291135
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 2427374075
+    locked: 0
+  - name: Win Sprite
+    uniqueID: 2385668363
     locked: 0

@@ -64,7 +64,6 @@ public class Tags : MonoBehaviour {
 
         #endregion
 
-        [HideInInspector]
         public bool Tileset_is_Inverted = false;
 
     #endregion

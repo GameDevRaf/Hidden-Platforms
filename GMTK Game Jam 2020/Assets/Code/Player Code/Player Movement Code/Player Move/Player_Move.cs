@@ -133,8 +133,6 @@ public class Player_Move : MonoBehaviour {
 
                 Player_Walking_Sound.Play ();
 
-                Debug.Log ("Playing Walking Sound");
-
 
             }
 
@@ -142,8 +140,6 @@ public class Player_Move : MonoBehaviour {
             else if(Player_jump.Player_is_Grounded == false && Player_Walking_Sound.isPlaying == true || Movement.x == 0) {
 
                 Player_Walking_Sound.Stop ();
-
-                Debug.Log ("Stopping Walking Sound");
 
             }
 

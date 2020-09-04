@@ -8,17 +8,32 @@ public class Switch_Platform_To_Normal : MonoBehaviour {
 
         #region Script's
 
-            public Tags Tag;
+            [Header ("Script"), Space]
+            [SerializeField]
+            private Tags Tag;
 
         #endregion
 
-        #region GameObject'
+        #region GameObject's
+
+            [Header ("GameObject's"), Space]
 
             [SerializeField] 
             private GameObject Normal_Tileset;
 
             [SerializeField]
             private GameObject Inverted_Tileset;
+
+        #endregion
+
+        #region Array's
+
+            [Header ("Array's"), Space]
+            [SerializeField]
+            private GameObject[] Lights;
+
+            [SerializeField]
+            private GameObject[] Hidden_Lights;
 
         #endregion
 
@@ -34,6 +49,22 @@ public class Switch_Platform_To_Normal : MonoBehaviour {
                 Normal_Tileset.SetActive (true);
 
                 FindObjectOfType <Audio_Manager> ().Play (Tags.Inverted_to_Normal);
+
+                #region Change The Lights
+
+                    for (int i = 0; i < Lights.Length; i++) {
+                
+                        Lights[i].SetActive (true);
+                
+                    }
+
+                    for (int i = 0; i < Hidden_Lights.Length; i++) {
+                
+                        Hidden_Lights[i].SetActive (false);
+                
+                    }
+
+                #endregion
 
                 Tag.Tileset_is_Inverted = false;
 

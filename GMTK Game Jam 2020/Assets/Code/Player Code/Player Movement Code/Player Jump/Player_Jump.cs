@@ -62,12 +62,12 @@ public class Player_Jump : MonoBehaviour {
     void Update() {
 
         Jump ();
-        
+
     }
 
     void Jump() {
 
-        if (Input.GetKeyDown (KeyCode.Z) && Player_is_Grounded == true || Input.GetKeyDown (KeyCode.Space) && Player_is_Grounded == true) {
+        if (Input.GetKeyDown (KeyCode.Z) && Player_is_Grounded == true || Input.GetKeyDown (KeyCode.UpArrow) && Player_is_Grounded == true || Input.GetKeyDown (KeyCode.W) && Player_is_Grounded == true) {
 
             Player_is_Jumping = true;
             Jump_Time_Counter = Jump_Time;
@@ -82,7 +82,7 @@ public class Player_Jump : MonoBehaviour {
             
         }
 
-        if (Input.GetKey (KeyCode.Z) && Player_is_Jumping == true || Input.GetKey (KeyCode.Space) && Player_is_Jumping == true) {
+        if (Input.GetKey (KeyCode.Z) && Player_is_Jumping == true || Input.GetKey (KeyCode.UpArrow) && Player_is_Jumping == true || Input.GetKey (KeyCode.W) && Player_is_Jumping == true) {
 
             if (Jump_Time_Counter > 0) {
                 
@@ -100,7 +100,7 @@ public class Player_Jump : MonoBehaviour {
             
         }
 
-        if (Input.GetKeyUp (KeyCode.Z) || Input.GetKeyUp (KeyCode.Space)) {
+        if (Input.GetKeyUp (KeyCode.Z) || Input.GetKeyUp (KeyCode.UpArrow) || Input.GetKeyUp (KeyCode.W)) {
 
             Player_is_Jumping = false;
             
