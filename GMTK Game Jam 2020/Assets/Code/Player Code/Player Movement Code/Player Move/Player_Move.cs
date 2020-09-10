@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using UnityEngine;
 
 public class Player_Move : MonoBehaviour {
@@ -41,9 +42,9 @@ public class Player_Move : MonoBehaviour {
 
         #endregion
 
-        #region Vector3 Variable's
-        
-            private Vector3 Movement;
+        #region Input Action's
+
+            private Input_Master Controls;
 
         #endregion
 
@@ -65,20 +66,33 @@ public class Player_Move : MonoBehaviour {
 
     #endregion
 
-    // Update is called once per frame
+    void Awake() {
+
+        Controls = new Input_Master ();
+
+    }
+
     void Update() {
+    
+        X_Movement = Controls.Player.Movement.ReadValue <float> ();
+
+        Move ();
+
+    }
+
+    void Move() {
 
         #region Flip Player ( When Moving Left )
 
             if (Player_is_Facing_Right == true) {
 
-                if (Movement.x > 0) {
+                if (X_Movement > 0) {
             
                     Player_Transform.eulerAngles = new Vector3 (0f, 0f, 0f);
 
                 }
 
-                else if(Movement.x < 0) {
+                else if(X_Movement < 0) {
 
                     if (Player_jump.Player_is_Grounded == true) {
 
@@ -94,13 +108,13 @@ public class Player_Move : MonoBehaviour {
 
             else if (Player_is_Facing_Right == false) {
 
-                if(Movement.x < 0) {
+                if(X_Movement < 0) {
 
                     Player_Transform.eulerAngles = new Vector3 (0f, 180f, 0f);
 
                 }
 
-                else if(Movement.x > 0) {
+                else if(X_Movement > 0) {
 
                     if (Player_jump.Player_is_Grounded == true) {
 
@@ -116,17 +130,16 @@ public class Player_Move : MonoBehaviour {
 
         #endregion
 
-        X_Movement = Input.GetAxisRaw (Tags.Horizontal_Movement);
+        Vector3 Movement = new Vector3 (X_Movement * Time.deltaTime * Move_Speed, 0, 0);
 
-        Movement.x = X_Movement;
-
-        Player_Transform.position += Movement * Time.deltaTime * Move_Speed;
+        Player_Transform.position += Movement;
 
         Player_Animator.SetFloat (Tags.Speed, Mathf.Abs (X_Movement));
 
         #region Player Walking Sound
 
-            if (Player_jump.Player_is_Grounded == true && Movement.x > 0 && Player_Walking_Sound.isPlaying == false || Player_jump.Player_is_Grounded == true && Movement.x < 0 && Player_Walking_Sound.isPlaying == false) {
+            if (Player_jump.Player_is_Grounded == true && X_Movement > 0 && Player_Walking_Sound.isPlaying == false || 
+            Player_jump.Player_is_Grounded == true && X_Movement < 0 && Player_Walking_Sound.isPlaying == false) {
             
                 Player_Walking_Sound.volume = Random.Range (0.18f, 0.42f);
                 Player_Walking_Sound.pitch = Random.Range (0.7f, 1.1f);
@@ -137,7 +150,7 @@ public class Player_Move : MonoBehaviour {
             }
 
 
-            else if(Player_jump.Player_is_Grounded == false && Player_Walking_Sound.isPlaying == true || Movement.x == 0) {
+            else if(Player_jump.Player_is_Grounded == false && Player_Walking_Sound.isPlaying == true || X_Movement == 0) {
 
                 Player_Walking_Sound.Stop ();
 
@@ -146,5 +159,21 @@ public class Player_Move : MonoBehaviour {
         #endregion
 
     }
+
+    #region Enable and Disable Controls
+
+        private void OnEnable() {
+
+            Controls.Enable ();
+        
+        }
+
+        private void OnDisable() {
+
+            Controls.Disable ();
+        
+        }
+
+    #endregion
 
 }

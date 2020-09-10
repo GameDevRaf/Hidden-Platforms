@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using UnityEngine;
 
 public class Player_Jump : MonoBehaviour {
@@ -34,6 +35,14 @@ public class Player_Jump : MonoBehaviour {
 
         #endregion
 
+        #region Input System's
+
+            Keyboard keyboard;
+
+            Gamepad Controller;
+
+        #endregion
+
         #region Float Variable's
 
             [SerializeField]
@@ -54,57 +63,191 @@ public class Player_Jump : MonoBehaviour {
 
             private bool Player_is_Jumping;
 
+
+
+            private bool Controller_is_Connected = false;
+
+            private bool Keyboard_is_Connected = false;
+
         #endregion
 
     #endregion
 
-    // Update is called once per frame
+    void Start() {
+
+
+        
+    }
+
     void Update() {
 
         Jump ();
 
-    }
+        #region Check what Input Device's are Connected
 
-    void Jump() {
+            // See if the Controller is Connected
+            if (Gamepad.current != null) {
 
-        if (Input.GetKeyDown (KeyCode.Z) && Player_is_Grounded == true || Input.GetKeyDown (KeyCode.UpArrow) && Player_is_Grounded == true || Input.GetKeyDown (KeyCode.W) && Player_is_Grounded == true) {
+                Controller = Gamepad.current;
 
-            Player_is_Jumping = true;
-            Jump_Time_Counter = Jump_Time;
+                Controller_is_Connected = true;
 
-            Dust_Cloud.Play ();
+                Debug.Log ("The Controller is: " + Controller_is_Connected);
 
-            FindObjectOfType <Audio_Manager> ().Play (Tags.Player_Jump);
-
-            Player_Rigidbody.velocity = Vector2.up * Jump_Force;
-
-            Player_Animator.SetBool (Tags.Is_Grounded, false);
-            
-        }
-
-        if (Input.GetKey (KeyCode.Z) && Player_is_Jumping == true || Input.GetKey (KeyCode.UpArrow) && Player_is_Jumping == true || Input.GetKey (KeyCode.W) && Player_is_Jumping == true) {
-
-            if (Jump_Time_Counter > 0) {
-                
-                Player_Rigidbody.velocity = Vector2.up * Jump_Force;
-
-                Jump_Time_Counter -= Time.deltaTime;
+                return;
 
             }
 
             else {
 
-                Player_is_Jumping = false;
-                
+                Controller_is_Connected = false;
+
             }
-            
+            // End Comment.
+
+
+
+
+
         }
 
-        if (Input.GetKeyUp (KeyCode.Z) || Input.GetKeyUp (KeyCode.UpArrow) || Input.GetKeyUp (KeyCode.W)) {
+    #endregion
 
-            Player_is_Jumping = false;
-            
+    void Jump() {
+
+        if (Keyboard_is_Connected == true) {
+
+            if (Keyboard.current.zKey.wasPressedThisFrame && Player_is_Grounded == true || 
+
+            Keyboard.current.upArrowKey.wasPressedThisFrame && Player_is_Grounded == true || 
+
+            Keyboard.current.wKey.wasPressedThisFrame && Player_is_Grounded == true || 
+
+            Keyboard.current.spaceKey.wasPressedThisFrame && Player_is_Grounded == true) {
+
+                Player_is_Jumping = true;
+                Jump_Time_Counter = Jump_Time;
+
+                Dust_Cloud.Play ();
+
+                FindObjectOfType <Audio_Manager> ().Play (Tags.Player_Jump);
+
+                Player_Rigidbody.velocity = Vector2.up * Jump_Force;
+
+                Player_Animator.SetBool (Tags.Is_Grounded, false);
+
+            }
+
+            if (Keyboard.current.zKey.isPressed && Player_is_Jumping == true || 
+
+            Keyboard.current.upArrowKey.isPressed && Player_is_Jumping == true || 
+
+            Keyboard.current.wKey.isPressed && Player_is_Jumping == true || 
+
+            Keyboard.current.spaceKey.isPressed && Player_is_Jumping == true) {
+
+                if (Jump_Time_Counter > 0) {
+
+                    Player_Rigidbody.velocity = Vector2.up * Jump_Force;
+
+                    Jump_Time_Counter -= Time.deltaTime;
+
+                }
+
+                else {
+
+                    Player_is_Jumping = false;
+
+                }
+
+            }
+
+            if (Keyboard.current.zKey.wasReleasedThisFrame || 
+
+            Keyboard.current.upArrowKey.wasReleasedThisFrame || 
+
+            Keyboard.current.wKey.wasReleasedThisFrame || 
+
+            Keyboard.current.spaceKey.wasReleasedThisFrame) {
+
+                Player_is_Jumping = false;
+
+            }
+
         }
+
+        if (Controller_is_Connected == true) {
+
+            if (Controller.buttonSouth.wasPressedThisFrame && Player_is_Grounded == true || 
+
+                Controller.dpad.up.wasPressedThisFrame && Player_is_Grounded == true) {
+
+                Player_is_Jumping = true;
+                Jump_Time_Counter = Jump_Time;
+
+                Dust_Cloud.Play ();
+
+                FindObjectOfType <Audio_Manager> ().Play (Tags.Player_Jump);
+
+                Player_Rigidbody.velocity = Vector2.up * Jump_Force;
+
+                Player_Animator.SetBool (Tags.Is_Grounded, false);
+
+            }
+
+            if (Controller.buttonSouth.isPressed && Player_is_Jumping == true || 
+
+            Controller.dpad.up.isPressed && Player_is_Jumping == true) {
+
+                if (Jump_Time_Counter > 0) {
+
+                    Player_Rigidbody.velocity = Vector2.up * Jump_Force;
+
+                    Jump_Time_Counter -= Time.deltaTime;
+
+                }
+
+                else {
+
+                    Player_is_Jumping = false;
+
+                }
+
+            }
+
+            if (Controller.buttonSouth.wasReleasedThisFrame || 
+
+            Controller.dpad.up.wasReleasedThisFrame) {
+
+                Player_is_Jumping = false;
+
+            }
+
+        }
+
+    }
+
+    void FixedUpdate() {
+
+        // See if the Keyboard is connected
+        if (Keyboard.current != null) {
+
+            keyboard = Keyboard.current;
+
+            Keyboard_is_Connected = true;
+
+            Debug.Log ("The Keyboard is: " + Keyboard_is_Connected);
+
+            return;
+
+        }
+
+        else {
+
+            Keyboard_is_Connected = false;
+
+        }
+        // End Comment.
 
     }
 
